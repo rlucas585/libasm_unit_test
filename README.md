@@ -13,19 +13,16 @@ Then:
 ```bash
 ./run.sh
 ```
-Test all 6 mandatory functions.
+Test all functions that are present in your libasm.a. If any functions are
+absent, they will be skipped.
 
 ```bash
 ./run.sh test
 ```
-Test all 6 mandatory functions.
-
-```bash
-./run.sh bonus
-```
-Test all 6 mandatory functions, and all 5 bonus functions.
+Equivalent to './run.sh'
 
 ```bash
 ./run.sh nocrit
 ```
-Tests all 6 mandatory functions. Does not require criterion.
+Does not require criterion. Will only test for the 6 mandatory functions, which
+MUST be present for this test to run.

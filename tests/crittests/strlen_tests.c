@@ -1,42 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   tests.c                                            :+:    :+:            */
+/*   strlen_tests.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rlucas <marvin@codam.nl>                     +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/28 17:46:43 by rlucas        #+#    #+#                 */
-/*   Updated: 2020/03/05 23:45:48 by rlucas        ########   odam.nl         */
+/*   Created: 2020/03/12 21:56:43 by rlucas        #+#    #+#                 */
+/*   Updated: 2020/03/12 21:57:46 by rlucas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <criterion/criterion.h>
+#include <criterion/redirect.h>
 #include <libasm.h>
+#include <string.h>
+#include <stdio.h>
 
-void	expect_eq(char *actual, const char *expected);
-void	strdup_test(const char *str);
-void	strcmp_test(const char *str1, const char *str2);
-void	strlen_test(const char *str);
-void	strcpy_test(const char *str);
-void	read_test(const char *str);
-void	write_test(const char *str);
-
-Test(Mandatory_Tests, strdup_test)
+void	strlen_test(const char *str)
 {
-	strdup_test("A test with a moderate length string\n");
-	strdup_test("");
-	strdup_test("											"
-			"							empty				"
-			"with				tabs");
-}
-
-Test(Mandatory_Tests, strcmp_test)
-{
-	strcmp_test("STRing 1", "STRing 2");
-	strcmp_test("", "STRing 2");
-	strcmp_test("oadkfskfjl", "--wkwefjk3jf");
-	strcmp_test("Exactly the same", "Exactly the same");
-	strcmp_test("String for compare", "");
+	cr_expect(strlen(str) == ft_strlen(str));
 }
 
 Test(Mandatory_Tests, strlen_test)
@@ -71,38 +53,3 @@ Test(Mandatory_Tests, strlen_test)
 			);
 }
 
-Test(Mandatory_Tests, strcpy_test)
-{
-	strcpy_test("Baba Ganoush");
-	strcpy_test("");
-	strcpy_test("akfjdsklfjsenioeanvevjawklcjekcmkescaklemcklejacklejaklj"
-			"cjeisojfesickjcskljeksjeksjcklesjcklejskcje");
-	strcpy_test("Have you ever heard the story of Darth Plageuius the Wise?"
-			"I thought not. It's not a story the Jedi would teach you.");
-}
-
-Test(Mandatory_Tests, read_test)
-{
-	read_test("tests/texts/testread.txt");
-	read_test("tests/texts/notafile.txt");
-}
-
-Test(Mandatory_Tests, write_test)
-{
-	char		*str;
-
-	str = strdup(
-	"Did you ever hear the tragedy of Darth Plagueis The Wise? I thought not."
-	 " It's not a story the Jedi would tell you. It's a Sith legend. Darth "
-	 "Plagueis was a Dark Lord of the Sith, so powerful and so wise he could "
-	 "use the Force to influence the midichlorians to create life... He had "
-	 "such a knowledge of the dark side, he could even keep the ones he cared "
-	 "about from dying. The dark side of the Force is a pathway to many "
-	 "abilities some consider to be unnatural. He became so powerful... the "
-	 "only thing he was afraid of was losing his power, which eventually, "
-	 "of course, he did. Unfortunately, he taught his apprentice everything "
-	 "he knew, then his apprentice killed him in his sleep. Ironic. He could "
-	 "save others from death, but not himself.\n");
-	write_test(str);
-	free(str);
-}

@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   testmain_bonus.c                                   :+:    :+:            */
+/*   atoi_base_bonus_tests.c                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rlucas <marvin@codam.nl>                     +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/29 13:36:23 by rlucas        #+#    #+#                 */
-/*   Updated: 2020/03/12 19:10:40 by rlucas        ########   odam.nl         */
+/*   Created: 2020/03/12 22:10:39 by rlucas        #+#    #+#                 */
+/*   Updated: 2020/03/12 22:11:16 by rlucas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <criterion/criterion.h>
-#include <libasm_bonus.h>
-
-#define INT 1
-#define STRING 2
-#define PRINT 1
-#define NO_PRINT 0
+#include <libasm.h>
+#include <stdio.h>
+#include <tests.h>
 
 void	ft_atoi_base_test(const char *test, const char *base,
-		int expected, int print);
-void	ft_list_push_front_test(int type, void *data, int len);
-void	ft_list_size_test(int type, void *data, int len);
-void	ft_list_sort_test(int type, void *data, int len);
-void	ft_list_remove_if_test(int type, void *data, int len);
+		int expected, int print)
+{
+	int		actual;
+
+	actual = ft_atoi_base((char *)test, (char *)base);
+	cr_expect(actual == expected, "Number: %s Base: %s Expected: %d Actual %d",
+			test, base, expected, actual);
+	if (print)
+	{
+		printf("Number: %s Base: %s Expected: %d Actual: %d\n",
+				test, base, expected, actual);
+	}
+}
 
 Test(Bonus_Tests, ft_atoi_base_test)
 {
@@ -49,74 +54,4 @@ Test(Bonus_Tests, ft_atoi_base_test)
 	ft_atoi_base_test("0101010", "01", 42, NO_PRINT);
 	ft_atoi_base_test("thijs", "0123456789abcdefghijklmnopqrstuvwxyz",
 			49526056, NO_PRINT);
-}
-
-Test(Bonus_Tests, ft_list_push_front_test)
-{
-	int		int_array[4] = {5, 20, 35, 70};
-	char	*str_array[8] = {
-		"Giraffe",
-		"Monkey",
-		"Anteater",
-		"Lion",
-		"Thijs",
-		"Baboon",
-		"Chimpanzee",
-		"Rhinoceros"
-	};
-
-	ft_list_push_front_test(INT, int_array, 4);
-	ft_list_push_front_test(STRING, str_array, 8);
-}
-
-Test(Bonus_Tests, ft_list_size_test)
-{
-	int		int_array[4] = {5, 20, 35, 70};
-	char	*str_array[8] = {
-		"Giraffe",
-		"Monkey",
-		"Anteater",
-		"Lion",
-		"Thijs",
-		"Baboon",
-		"Chimpanzee",
-		"Rhinoceros"
-	};
-
-	ft_list_size_test(INT, int_array, 4);
-	ft_list_size_test(STRING, str_array, 8);
-}
-
-Test(Bonus_Tests, ft_list_sort_test)
-{
-	int		int_array[8] = {20, 5, 70, 35, -400, 999, 13, 420};
-	char	*str_array[8] = {
-		"Giraffe",
-		"Monkey",
-		"Anteater",
-		"Lion",
-		"Thijs",
-		"Baboon",
-		"Chimpanzee",
-		"Rhinoceros"
-	};
-
-	ft_list_sort_test(INT, int_array, 8);
-	ft_list_sort_test(STRING, str_array, 8);
-}
-
-Test(Bonus_Tests, ft_list_remove_if_test)
-{
-	char	*str_array[8] = {
-		"Glorious Vim User",
-		"Disgraceful Visual Studio Code User",
-		"Disgraceful Visual Studio Code User",
-		"Disgraceful Visual Studio Code User",
-		"Glorious Vim User",
-		"Glorious Vim User",
-		"An emacs user???",
-		"Glorious Vim User"
-	};
-
-	ft_list_remove_if_test(STRING, str_array, 8);
 }

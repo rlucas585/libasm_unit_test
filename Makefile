@@ -6,7 +6,7 @@
 #    By: rlucas <marvin@codam.nl>                     +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/20 10:00:23 by rlucas        #+#    #+#                  #
-#    Updated: 2020/03/12 19:11:52 by rlucas        ########   odam.nl          #
+#    Updated: 2020/03/12 22:39:21 by rlucas        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,9 @@ HEADDIR = includes/
 
 TESTDIR = tests/
 
-TESTEXEC = test
+CRITTESTDIR = tests/crittests/
 
+TESTEXEC = test
 
 #-----------------------------Select sources------------------------------------
 
@@ -32,15 +33,36 @@ SRC = $(TESTDIR)nocrit_main.c \
 	  $(TESTDIR)strcmp_tests.c \
 	  $(TESTDIR)strdup_tests.c
 
-CRITSRC = $(TESTDIR)tests.c \
-	  $(TESTDIR)testmain.c
+ALLOBJ = ft_write.o \
+		 ft_read.o \
+		 ft_strlen.o \
+		 ft_strcpy.o \
+		 ft_strcmp.o \
+		 ft_strdup.o
 
-BONUSCRITSRC = $(TESTDIR)testmain_bonus.c \
-		   $(TESTDIR)tests_bonus.c
+BONUSOBJ = ft_list_size_bonus.o \
+		   ft_list_push_front_bonus.o \
+		   ft_list_sort_bonus.o \
+		   ft_list_remove_if_bonus.o \
+		   ft_atoi_base_bonus.o
 
-ifdef WITH_BONUS
-	CRITSRC += $(BONUSCRITSRC)
-endif
+PAREN1 = (
+PAREN2 = )
+
+CRITSRC = $(CRITTESTDIR)utils.c
+
+PRESENTFUNCS = $(shell nm libasm.a | grep "\.o")
+
+FUNCS = $(foreach object,$(PRESENTFUNCS),$(subst libasm.a$(PAREN1),,$(subst $(PAREN2):,,$(object))))
+
+ABSENT = $(filter-out $(FUNCS),$(ALLOBJ) $(BONUSOBJ))
+
+TOCOMPILE = $(filter-out $(ABSENT),$(ALLOBJ) $(BONUSOBJ))
+
+CRITSRC += $(patsubst ft_%.o,$(CRITTESTDIR)%_tests.c,$(TOCOMPILE))
+
+check:
+	@printf "$(CRITSRC)\n"
 
 #------------------------Library and Flags definitions--------------------------
 
@@ -48,15 +70,16 @@ FLAGS = -Wall -Wextra -Werror
 
 #---------------------Compile test executable (criterion)-----------------------
 
+
 test:
+ifneq ($(ABSENT),)
+	@printf "The following functions are absent from your libasm.a: $(ABSENT)\n\n"
+endif
 	@gcc $(FLAGS) -I$(HEADDIR) -o $(TESTEXEC) $(CRITSRC) -L. \
 		-l$(subst .a,,$(subst lib,,$(LIB))) \
 		-lcriterion
 	@./$(TESTEXEC)
 	@rm -f $(TESTEXEC)
-
-bonustest:
-	@$(MAKE) WITH_BONUS=1 test
 
 #---------------------Compile test executable (no criterion)--------------------
 
