@@ -6,7 +6,7 @@
 /*   By: rlucas <marvin@codam.nl>                     +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 19:02:53 by rlucas        #+#    #+#                 */
-/*   Updated: 2020/03/05 23:57:56 by rlucas        ########   odam.nl         */
+/*   Updated: 2020/03/12 19:17:23 by rlucas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,14 @@ void	strcpy_test(const char *str)
 	ft_strcpy(str2, str);
 	cr_expect_str_eq(str2, str1, "*Actual*: \"%s\""
 			"\nExpected: \"%s\"", str2, str1);
+	cr_expect(strcmp(str1, str2) == 0);
 	free(str1);
 	free(str2);
 	strcpy(str3, str);
 	ft_strcpy(str4, str);
 	cr_expect_str_eq(str4, str3, "*Actual*: \"%s\""
 			"\nExpected: \"%s\"", str4, str3);
+	cr_expect(strcmp(str3, str4) == 0);
 	bzero(str3, 300);
 	bzero(str4, 300);
 }

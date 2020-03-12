@@ -18,31 +18,20 @@ then
 " is not installed)\n"
 	exit
 fi
-if [ "$1" == "test" ] || [ "$#" == 0 ]
+if [ -e "libasm.a" ]
 then
-	if [ -e "libasm.a" ]
+	if [ "$1" == "test" ] || [ "$#" == 0 ]
 	then
 		make test
-	else
-		printf $RED"Please make sure libasm.a is in the current directory\n"
 	fi
-fi
-if [ "$1" == "bonus" ]
-then
-	if [ -e "libasm_bonus.a" ]
+	if [ "$1" == "bonus" ]
 	then
 		make bonustest
-	else
-		printf $RED"Please make sure libasm_bonus.a is in the "\
-"current directory\n"
 	fi
-fi
-if [ "$1" == "nocrit" ]
-then
-	if [ -e "libasm.a" ]
+	if [ "$1" == "nocrit" ]
 	then
 		make nocrit
-	else
-		printf $RED"Please make sure libasm.a is in the current directory\n"
 	fi
+else
+	printf $RED"Please make sure libasm.a is in the current directory\n"
 fi

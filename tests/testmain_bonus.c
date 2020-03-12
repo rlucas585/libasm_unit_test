@@ -6,7 +6,7 @@
 /*   By: rlucas <marvin@codam.nl>                     +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/29 13:36:23 by rlucas        #+#    #+#                 */
-/*   Updated: 2020/03/11 19:39:02 by rlucas        ########   odam.nl         */
+/*   Updated: 2020/03/12 19:10:40 by rlucas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,12 @@
 #define PRINT 1
 #define NO_PRINT 0
 
-void	ft_atoi_test(const char *test);
 void	ft_atoi_base_test(const char *test, const char *base,
 		int expected, int print);
 void	ft_list_push_front_test(int type, void *data, int len);
 void	ft_list_size_test(int type, void *data, int len);
 void	ft_list_sort_test(int type, void *data, int len);
 void	ft_list_remove_if_test(int type, void *data, int len);
-
-Test(Bonus_Tests, ft_atoi_test)
-{
-	ft_atoi_test("147928");
-	ft_atoi_test("-1234897");
-	ft_atoi_test("        -1234897");
-	ft_atoi_test("    -123aaa");
-	ft_atoi_test("			2829b");
-	ft_atoi_test("abcdefg");
-	ft_atoi_test("12893472974920849824");
-	ft_atoi_test("    -12893472974920849824");
-	ft_atoi_test("1289347297492084982428472847");
-	ft_atoi_test("    -1289347297492084982428472847");
-}
 
 Test(Bonus_Tests, ft_atoi_base_test)
 {

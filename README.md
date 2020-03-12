@@ -7,8 +7,7 @@ Requires criterion for testing of the bonus, which can be found
 
 ## How to Run
 
-First, place your library (must be named libasm.a for mandatory functions,
-or libasm_bonus.a for mandatory and bonus functions) inside the repo directory.
+First, place your library (must be named libasm.a) inside the repo directory.
 Then:
 
 ```bash

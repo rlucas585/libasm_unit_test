@@ -6,18 +6,14 @@
 #    By: rlucas <marvin@codam.nl>                     +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/20 10:00:23 by rlucas        #+#    #+#                  #
-#    Updated: 2020/03/12 18:22:32 by rlucas        ########   odam.nl          #
+#    Updated: 2020/03/12 19:11:52 by rlucas        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 #-------------------------------------------------------------------------------
 
 
-ifdef WITH_BONUS
-	LIB = libasm_bonus.a
-else
-	LIB = libasm.a
-endif
+LIB = libasm.a
 
 HEADDIR = includes/
 
