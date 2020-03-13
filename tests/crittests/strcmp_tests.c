@@ -6,7 +6,7 @@
 /*   By: rlucas <marvin@codam.nl>                     +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/12 21:58:47 by rlucas        #+#    #+#                 */
-/*   Updated: 2020/03/12 21:59:11 by rlucas        ########   odam.nl         */
+/*   Updated: 2020/03/13 15:04:02 by rlucas        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ Test(Mandatory_Tests, strcmp_test)
 {
 	strcmp_test("STRing 1", "STRing 2");
 	strcmp_test("", "STRing 2");
+	strcmp_test("", "");
+	strcmp_test("STRing 2", "");
 	strcmp_test("oadkfskfjl", "--wkwefjk3jf");
 	strcmp_test("Exactly the same", "Exactly the same");
 	strcmp_test("String for compare", "");
